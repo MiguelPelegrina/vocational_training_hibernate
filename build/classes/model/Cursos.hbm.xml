@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-dic-2022 10:19:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Cursos" table="CURSOS" schema="AD_ACADEMIA" optimistic-lock="version">
+        <id name="ccodcurso" type="string">
+            <column name="CCODCURSO" length="6" />
+            <generator class="assigned" />
+        </id>
+        <property name="cnomcurso" type="string">
+            <column name="CNOMCURSO" length="100" not-null="true" />
+        </property>
+        <property name="nnumexa" type="short">
+            <column name="NNUMEXA" precision="3" scale="0" not-null="true" />
+        </property>
+        <!-- cascade="save_update"-->
+        <set name="matriculases" table="MATRICULAS" inverse="false" lazy="false" fetch="join" cascade="save-update">
+            <key>
+                <column name="CCODCURSO" length="6" not-null="true" />
+            </key>
+            <one-to-many class="model.Matriculas" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-dic-2022 10:19:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Examenes" table="EXAMENES" schema="AD_ACADEMIA" optimistic-lock="version">
+        <composite-id name="id" class="model.ExamenesId">
+            <key-property name="ccodalu" type="string">
+                <column name="CCODALU" length="6" />
+            </key-property>
+            <key-property name="ccodcurso" type="string">
+                <column name="CCODCURSO" length="6" />
+            </key-property>
+            <key-property name="nnumexam" type="short">
+                <column name="NNUMEXAM" precision="3" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="matriculas" class="model.Matriculas" update="false" insert="false" fetch="select">
+            <column name="CCODALU" length="6" not-null="true" />
+            <column name="CCODCURSO" length="6" not-null="true" />
+        </many-to-one>
+        <property name="dfecexam" type="date">
+            <column name="DFECEXAM" length="7" />
+        </property>
+        <!-- Modificado a long en vez de el BigDecimal por defecto -->
+        <property name="nnotaexam" type="long">            
+            <column name="NNOTAEXAM" precision="6" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
